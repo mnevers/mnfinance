@@ -2,8 +2,7 @@ import yfinance as yf
 import sys
 import pandas as pd
 from datetime import datetime, timedelta
-
-from datetime import datetime, timedelta
+from termcolor import colored
 
 def get_weekday_range(date_str):
     # Parse the input date string into a datetime object
@@ -16,7 +15,7 @@ def get_weekday_range(date_str):
         days_before -= timedelta(days=1)
     
     # Find the next valid weekday
-    days_after = date + timedelta(days=2)
+    days_after = date + timedelta(days=5)
     while days_after.weekday() >= 5:  # Skip Saturday (5) and Sunday (6)
         days_after += timedelta(days=1)
 
@@ -39,26 +38,40 @@ def get_earnings_history(ticker_symbol):
     earnings_dates = earnings_dates[earnings_dates.index < current_date]   
     print("")
     total = 0
-    down = 0
+    up = 0
 
     for d in earnings_dates.index.date:    
         date_range = get_weekday_range(str(d))
         historical_data = ticker.history(start=date_range[0], end=date_range[1])    
         before = round_price(historical_data['Close'].iloc[1])
-        after = round_price(historical_data['Close'].iloc[-1])
+        after = round_price(historical_data['Close'].iloc[2])
         total+=1
 
         t = after - before
         move = str(round_price((abs(t) / before) * 100)) + "%"
         if after < before:
             move = "-"+move
-            down+=1
+        else:
+            up+=1
 
         print(f"Earnings Date: {d}")
         print(f"Before: {before}")
         print(f"After: {after}")
-        print(f"Percent Move: {move}")
+        print(f"Percent Move: {move}")        
         print("")
+        
+    percent_up = round_price(up / total * 100)
+    color = "yellow"
+
+    if percent_up > 50:
+        color = "green"
+    elif percent_up <50:
+        color = "red" 
+
+    percent_up = str(percent_up) + "%"
+    
+    print(colored(f"Percentage of times up: {percent_up}", color))   
+    print("")
     
 
 if __name__ == "__main__":
