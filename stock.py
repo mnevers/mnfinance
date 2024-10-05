@@ -20,7 +20,7 @@ def format_volume(volume):
         return f"{volume:.0f}"
 
 def round_price(price):
-    return round(price, 2)
+    return round(price, 2) #test
 
 def get_stock_data(ticker):
     stock = yf.Ticker(ticker)
