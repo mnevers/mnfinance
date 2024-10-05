@@ -1,15 +1,6 @@
 import yfinance as yf
 import sys
 
-def get_upcoming_earnings(ticker_symbol):
-    # Create a Ticker object
-    ticker = yf.Ticker(ticker_symbol)
-
-    # Get earnings dates
-    earnings_dates = ticker.earnings_dates
-
-    print(earnings_dates)
-
 def format_market_cap(market_cap):
     if market_cap >= 1e12:
         return f"{market_cap / 1e12:.3g}T"
@@ -32,10 +23,7 @@ def round_price(price):
     return round(price, 2)
 
 def get_stock_data(ticker):
-    # Fetch the stock data
     stock = yf.Ticker(ticker)
-
-    # Get common stock information
     data = {
         "Ticker": ticker.upper(),
         "Price": round_price(stock.history(period='1d')['Close'].iloc[-1]) if not stock.history(period='1d')['Close'].empty else 'N/A',  # Handle missing price
