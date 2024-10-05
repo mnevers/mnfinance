@@ -43,8 +43,15 @@ def get_earnings_history(ticker_symbol):
     for d in earnings_dates.index.date:    
         date_range = get_weekday_range(str(d))
         historical_data = ticker.history(start=date_range[0], end=date_range[1])    
-        before = round_price(historical_data['Close'].iloc[1])
-        after = round_price(historical_data['Close'].iloc[2])
+
+        #if after close else before close
+        if earnings_dates.index.time[0].hour > 14:
+            before = round_price(historical_data['Close'].iloc[1])
+            after = round_price(historical_data['Close'].iloc[2])
+        else:
+            before = round_price(historical_data['Close'].iloc[0])
+            after = round_price(historical_data['Close'].iloc[1])
+
         total+=1
 
         t = after - before
@@ -65,7 +72,7 @@ def get_earnings_history(ticker_symbol):
 
     if percent_up > 50:
         color = "green"
-    elif percent_up <50:
+    elif percent_up < 50:
         color = "red" 
 
     percent_up = str(percent_up) + "%"
