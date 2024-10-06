@@ -45,8 +45,8 @@ def get_expected_move(ticker_symbol, expiration_date):
     print(f"ATM Strike Price: {atm_strike}")
     print(f"ATM Call Price: {atm_call_price}")
     print(f"ATM Put Price: {atm_put_price}")    
-    print(colored(f"Expected Move: {expected_move}", "cyan"))
-    print(colored(f"Percentage Move: {percentage_move}", "light_magenta"))
+    print(colored(f"Expected Move: {expected_move}", "yellow"))
+    print(colored(f"Percentage Move: {percentage_move}", "cyan"))
     print("")
 
 if __name__ == "__main__":
