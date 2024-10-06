@@ -91,7 +91,7 @@ def get_price_difference(ticker_symbol, date_ranges, year):
 
     print(f"Percentage of Time closed up: {percent_up}")
     print("")
-    print(f"Percentage of Time up .4%: {lg_mv_percent}")
+    print(f"Percentage of Time up .4% or more: {lg_mv_percent}")
     print("")
 
 if __name__ == "__main__":
