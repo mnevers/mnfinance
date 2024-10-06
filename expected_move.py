@@ -23,6 +23,7 @@ def get_expected_move(ticker_symbol, expiration_date):
 
     # Get ATM call and put prices
     atm_call_price = options.calls[options.calls['strike'] == atm_strike]['lastPrice'].values[0] if not options.puts[options.puts['strike'] == atm_strike].empty else 0
+    atm_iv = options.calls[options.calls['strike'] == atm_strike]['impliedVolatility'].values[0]
     atm_put_price = options.puts[options.puts['strike'] == atm_strike]['lastPrice'].values[0] if not options.puts[options.puts['strike'] == atm_strike].empty else atm_call_price
     
     if atm_call_price == 0:
@@ -40,11 +41,12 @@ def get_expected_move(ticker_symbol, expiration_date):
     print(f"Expiration Date: {expiration_date}")   
     print(f"Stock Price: {current_price:.2f}")  
     print(f"Total Options Volume: {total_options_volume}") 
+    print(f"Implied Volatility (IV): {atm_iv:.2%}")
     print(f"ATM Strike Price: {atm_strike}")
     print(f"ATM Call Price: {atm_call_price}")
     print(f"ATM Put Price: {atm_put_price}")    
-    print(colored(f"Expected Move: {expected_move}", "yellow"))
-    print(colored(f"Percentage Move: {percentage_move}", "yellow"))
+    print(colored(f"Expected Move: {expected_move}", "cyan"))
+    print(colored(f"Percentage Move: {percentage_move}", "light_magenta"))
     print("")
 
 if __name__ == "__main__":
