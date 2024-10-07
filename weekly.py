@@ -74,11 +74,12 @@ def get_price_difference(ticker_symbol, dates, year):
         price_difference = second_date - first_date
         if price_difference > 0:
             up += 1
-            
+
+            if price_difference > ((first_date*.0035)):
+                lg_move+=1
         elif price_difference < 0:
             down += 1
-            if price_difference < (first_date*.07):
-                lg_move+=1
+            
 
          # Output the results
         #print(f"Open price on {dates[i]}: {first_date}")
@@ -94,7 +95,7 @@ def get_price_difference(ticker_symbol, dates, year):
 
     print(f"Percentage of Time closed up: {percent_up}")
     print("")
-    print(f"Percentage of Time closed down 7% or more: {lg_mv_percent}")
+    print(f"Percentage of Time closed up 0.35% or more: {lg_mv_percent}")
     print("")
 
 if __name__ == "__main__":
