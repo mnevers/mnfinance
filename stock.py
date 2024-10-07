@@ -11,7 +11,7 @@ def format_large_numbers(num):
     elif num >= 1e3:
         return f"{num / 1e3:.3g}K"
     else:
-        return f"{market_cap:.0f}"
+        return f"{num:.0f}"
 
 def round_price(price):
     return round(price, 2) 
