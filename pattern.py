@@ -9,8 +9,15 @@ def get_hist_data():
 
     for cnt, val in enumerate(historical_data['Close']):        
         if cnt == 0:
-            low = historical_data['Close'].iloc[0]
-            high = historical_data['Close'].iloc[0]
+            low = val
+            high = val
+            print(f"High: {high}")
+            print(f"Low: {low}")
+            sys.exit(0)
+
+
+    print(f"High: {high}")
+    print(f"Low: {low}")
         
 
 
