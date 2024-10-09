@@ -15,15 +15,14 @@ def process_data(past,historical_data):
 
     for cnt, val in enumerate(historical_data['Open']):       
         if cnt > past:#if we have enough hist data to process
-            if val > historical_data['Close'].iloc[cnt-1]:
-                if val > historical_data['Close'].iloc[cnt-1]:
+            if val > historical_data['Close'].iloc[cnt-past]:   #if previous day close greater than today             
+                if val > historical_data['Close'].iloc[cnt]:
                     low_days+=1 #closed lower
-                elif val < historical_data['Close'].iloc[cnt-1]:
+                elif val < historical_data['Close'].iloc[cnt]:
                     high_days+=1 #closed higher
 
             
     return low_days,high_days
-
 
 if __name__ == "__main__":    
     tic = "SPY"

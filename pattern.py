@@ -4,7 +4,7 @@ import sys
 
 def get_data(tic):
     ticker = yf.Ticker(tic)
-    historical_data = ticker.history(start="2001-01-01", end="2024-10-04")
+    historical_data = ticker.history(start="2012-01-01", end="2024-10-04")
     print(len(historical_data))
 
     return historical_data
@@ -29,7 +29,7 @@ def process_data(past,future,historical_data):
                     if historical_data['Close'].iloc[n+offset] > high:
                         high = historical_data['Close'].iloc[n+offset]
             offset+=1 #estabilish offset for n loop
-            if val > high: #if at N time high or low
+            if val < low: #if at N time high or low
                 if cnt+future < len(historical_data): #if not index greater that data set
                     if historical_data['Close'].iloc[cnt+future] > val: #if F closing price is higher
                         high_days+=1
@@ -43,7 +43,7 @@ def process_data(past,future,historical_data):
 
 
 if __name__ == "__main__":    
-    tic = "SPY"
+    tic = "UVXY"
     hist = get_data(tic)
     
     best = 0
@@ -58,7 +58,7 @@ if __name__ == "__main__":
             print(f"{p+1},{f+1}")
             #time.sleep(.3)  # waiting so we don't overload API      
             percent = r[0] + r[1]
-            percent = r[0]/percent
+            percent = r[1]/percent
 
             if best < percent:
                 best = percent
