@@ -2,9 +2,13 @@ import yfinance as yf
 import time
 import sys
 
-def process_data(past,future):
+def get_data():
     ticker = yf.Ticker("SPY")
-    historical_data = ticker.history(start="2011-01-01", end="2024-10-04")    
+    historical_data = ticker.history(start="2011-01-01", end="2024-10-04")
+
+    return historical_data
+
+def process_data(past,future,historical_data):        
     low = 0
     high = 0
 
@@ -38,6 +42,8 @@ def process_data(past,future):
 
 
 if __name__ == "__main__":    
+    hist = get_data()
+    
     best = 0
     best_p = 0
     best_f = 0
@@ -46,7 +52,7 @@ if __name__ == "__main__":
     #60 is 3 months 20 business days in month about
     for p in range(59):
         for f in range(1):
-            r = process_data(p+1,f+1)    
+            r = process_data(p+1,f+1,hist)    
             print(f"{p+1},{f+1}")
             #time.sleep(.4)  # waiting so we don't overload API      
             percent = r[0] + r[1]
