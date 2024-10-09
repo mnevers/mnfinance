@@ -4,7 +4,7 @@ import sys
 
 def get_data(tic):
     ticker = yf.Ticker(tic)
-    historical_data = ticker.history(start="2011-01-01", end="2024-10-04")
+    historical_data = ticker.history(start="2001-01-01", end="2024-10-04")
     print(len(historical_data))
 
     return historical_data
