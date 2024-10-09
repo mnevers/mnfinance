@@ -2,9 +2,9 @@ import yfinance as yf
 import time
 import sys
 
-def get_data():
-    ticker = yf.Ticker("SPY")
-    historical_data = ticker.history(start="2001-01-01", end="2024-10-04")
+def get_data(tic):
+    ticker = yf.Ticker(tic)
+    historical_data = ticker.history(start="2011-01-01", end="2024-10-04")
     print(len(historical_data))
 
     return historical_data
@@ -29,7 +29,7 @@ def process_data(past,future,historical_data):
                     if historical_data['Close'].iloc[n+offset] > high:
                         high = historical_data['Close'].iloc[n+offset]
             offset+=1 #estabilish offset for n loop
-            if val < low: #if at N time high
+            if val < low: #if at N time high or low
                 if cnt+future < len(historical_data): #if not index greater that data set
                     if historical_data['Close'].iloc[cnt+future] > val: #if F closing price is higher
                         high_days+=1
@@ -43,7 +43,8 @@ def process_data(past,future,historical_data):
 
 
 if __name__ == "__main__":    
-    hist = get_data()
+    tic = "SQQQ"
+    hist = get_data(tic)
     
     best = 0
     best_p = 0
@@ -66,7 +67,7 @@ if __name__ == "__main__":
                 print(f"Best Past: {best_p} Best Future: {best_f} Best Percent: {best}")
     
     
-    out = "Best Past days: " + str(best_p) + ", Best future days: " + str(best_f) + ". With a percentage of: " + str(best) + "\n"
+    out = tic + " Best Past days: " + str(best_p) + ", Best future days: " + str(best_f) + ". With a percentage of: " + str(best) + "\n"
     print(out)
 
     text_file = open("Output.txt", "w")   
