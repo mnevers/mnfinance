@@ -15,7 +15,7 @@ def process_data(past,historical_data):
 
     for cnt, val in enumerate(historical_data['Open']):       
         if cnt > past:#if we have enough hist data to process
-            if val > historical_data['Close'].iloc[cnt-past]:   #if previous day close greater than today             
+            if val > historical_data['Close'].iloc[cnt-past]:   #if opened higher than prev closing day price         
                 if val > historical_data['Close'].iloc[cnt]:
                     low_days+=1 #closed lower
                 elif val < historical_data['Close'].iloc[cnt]:
@@ -30,12 +30,12 @@ if __name__ == "__main__":
     
     best = 0
     best_p = 0
-    best_f = 0
-    percent = 0    
 
     r = process_data(1,hist)
-    
-    out = tic + " Best Past days: " + str(best_p) + ", Best future days: " + str(best_f) + ". With a percentage of: " + str(best) + "\n"
+    t = r[0] + r [1]
+    best = r[0] / t
+
+    out = tic + " Best Past days: " + str(r[0]) + ", Best future days: " + str(1) + ". With a percentage of: " + str(best) + "\n"
     print(out)
 
 
