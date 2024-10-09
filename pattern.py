@@ -44,11 +44,11 @@ if __name__ == "__main__":
     percent = 0    
 
     #60 is 3 months 20 business days in month about
-    for p in range(2):
+    for p in range(19):
         for f in range(1):
             r = process_data(p+1,f+1)    
             print(f"{p+1},{f+1}")
-            time.sleep(.4)  # waiting so we don't overload API      
+            #time.sleep(.4)  # waiting so we don't overload API      
             percent = r[0] + r[1]
             percent = r[0]/percent
 
