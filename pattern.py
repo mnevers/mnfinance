@@ -47,7 +47,7 @@ if __name__ == "__main__":
     for p in range(59):
         for f in range(59):
             r = process_data(p+1,f+1)    
-            print(r)
+            print(f"{p+1},{f+1}")
             #time.sleep(.1)  # waiting so we don't overload API      
             percent = r[0] + r[1]
             percent = r[0]/percent
