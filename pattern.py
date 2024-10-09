@@ -24,7 +24,7 @@ def process_data(past,future):
                     if historical_data['Close'].iloc[n+offset] > high:
                         high = historical_data['Close'].iloc[n+offset]
             offset+=1 #estabilish offset for n loop
-            if val > high: #if at N time high
+            if val < low: #if at N time high
                 if cnt+future < len(historical_data): #if not index greater that data set
                     if historical_data['Close'].iloc[cnt+future] > val: #if F closing price is higher
                         high_days+=1
@@ -50,7 +50,7 @@ if __name__ == "__main__":
             print(f"{p+1},{f+1}")
             #time.sleep(.4)  # waiting so we don't overload API      
             percent = r[0] + r[1]
-            percent = r[0]/percent
+            percent = r[1]/percent
 
             if best < percent:
                 best = percent
