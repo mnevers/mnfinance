@@ -5,6 +5,7 @@ import sys
 def get_data():
     ticker = yf.Ticker("SPY")
     historical_data = ticker.history(start="2011-01-01", end="2024-10-04")
+    print(historical_data.index)
 
     return historical_data
 
