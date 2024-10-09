@@ -24,12 +24,12 @@ def process_data(past,future):
                     if historical_data['Close'].iloc[n+offset] > high:
                         high = historical_data['Close'].iloc[n+offset]
             offset+=1 #estabilish offset for n loop
-        if val > high: #if at N time high
-            if cnt+future < len(historical_data): #if not index greater that data set
-                if historical_data['Close'].iloc[cnt+future] > val: #if F closing price is higher
-                    high_days+=1
-                elif historical_data['Close'].iloc[cnt+future] < val:#if f closing price lower
-                    low_days+=1
+            if val > high: #if at N time high
+                if cnt+future < len(historical_data): #if not index greater that data set
+                    if historical_data['Close'].iloc[cnt+future] > val: #if F closing price is higher
+                        high_days+=1
+                    elif historical_data['Close'].iloc[cnt+future] < val:#if f closing price lower
+                        low_days+=1
             
     #print(f"{past} past days and {future} days in future")
     #print(f"High: {high_days}")
@@ -44,8 +44,8 @@ if __name__ == "__main__":
     percent = 0    
 
     #60 is 3 months 20 business days in month about
-    for p in range(59):
-        for f in range(59):
+    for p in range(2):
+        for f in range(1):
             r = process_data(p+1,f+1)    
             print(f"{p+1},{f+1}")
             time.sleep(.4)  # waiting so we don't overload API      
