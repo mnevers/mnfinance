@@ -4,7 +4,7 @@ import sys
 
 def get_data(tic):
     ticker = yf.Ticker(tic)
-    historical_data = ticker.history(start="2011-01-01", end="2024-10-04")
+    historical_data = ticker.history(start="2001-01-01", end="2024-10-04")
     print(len(historical_data))
 
     return historical_data
@@ -27,15 +27,12 @@ def process_data(past,historical_data):
 if __name__ == "__main__":    
     tic = "SPY"
     hist = get_data(tic)
-    
-    best = 0
-    best_p = 0
 
     r = process_data(1,hist)
     t = r[0] + r [1]
-    best = r[0] / t
+    close_percent = r[0] / t
 
-    out = tic + " Best Past days: " + str(r[0]) + ", Best future days: " + str(1) + ". With a percentage of: " + str(best) + "\n"
+    out = tic + " closed lower percentage of time: " + str(close_percent) + "\n"
     print(out)
 
 
