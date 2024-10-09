@@ -41,15 +41,8 @@ if __name__ == "__main__":
     best = 0
     best_p = 0
     best_f = 0
-    percent = 0
-    text_file = open("Output.txt", "w")
-    
+    percent = 0    
 
-    out = "Best Past days: " + str(best_p) + ", Best future days: " + str(best_f) + ". With a percentage of: " + str(percent)
-    text_file.write(out)
-    text_file.close()
-
-    sys.exit(0)
     #60 is 3 months 20 business days in month about
     for p in range(59):
         for f in range(59):
@@ -65,8 +58,14 @@ if __name__ == "__main__":
                 best_f = f+1
                 print(f"Best Past: {best_p} Best Future: {best_f} Best Percent: {percent}")
     
-    print(f"Best Past: {best_p} Best Future: {best_f} Best Percent: {percent}")
     
+    out = "Best Past days: " + str(best_p) + ", Best future days: " + str(best_f) + ". With a percentage of: " + str(percent) + "\n"
+    print(out)
+
+    text_file = open("Output.txt", "w")   
+    
+    text_file.write(out)
+    text_file.close()
 
 
     
