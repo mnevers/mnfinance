@@ -1,4 +1,5 @@
 import smtplib
+import yfinance as yf
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -29,10 +30,10 @@ if __name__ == "__main__":
     # Your Gmail SMTP details
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    sender_email = "your_email@gmail.com"
+    sender_email = "openwsalerts@gmail.com"
     receiver_email = "nevers.matthew@gmail.com"
-    subject = "Test Email"
-    body = "This is a test email sent using Python."
+    subject = "UPRO at 3 month low"
+    body = "Purchase some UPRO."
     
     # Gmail credentials
     login = "openwsalerts@gmail.com"
